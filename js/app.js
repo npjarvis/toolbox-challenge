@@ -1,4 +1,5 @@
 // think first about the data you are modeling:: 32 models
+// lays out grid and flips them
 $(document).ready(function() {
     var tilesArray = [];
     var idx;
@@ -51,7 +52,11 @@ $(document).ready(function() {
         row.append(img);
     });
     gameBoard.append(row);
-
+    var matchesMade = 0;
+    var remaining = 8;
+    var matchesMissed = 0;
+    var tile1 = null;
+    var tile2 = null;
     $('#game-board img').click(function() {
        // any event handler 'this' refers to the element that raises the event
        var img = $(this);
@@ -68,8 +73,23 @@ $(document).ready(function() {
         }); // Comment: after fade out
         // create a new variable for'tile' because it appears in multiple instances
         // once img is fully faded out we want to flip it
-
+        if (tile1 = tile2) {
+            matchesMade++;
+            remaining--;
+        }else {
+            matchesMissed++;
+        }
+         if (tile2 != null) {
+             tile1 = null;
+             tile2 = null;
+        }
     }); // Comment: on click of gameboard images
+
+//    if (tile.src = tile.src2) {
+//        matchesMade++;
+//        matchesMissing--;
+//    }
+
 
     //sets recurring timer, calls function every 1000 ms
     var startTime = _.now();
