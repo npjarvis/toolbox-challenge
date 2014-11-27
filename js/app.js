@@ -1,6 +1,12 @@
 // think first about the data you are modeling:: 32 models
 // lays out grid and flips them
 $(document).ready(function() {
+    var matchesMade = 0;
+    var remaining = 8;
+    var matchesMissed = 0;
+    var guess = [];
+    var guessedTiles = 0;
+
     var tilesArray = [];
     var idx;
     // start at 1 instead of 0 because there is no tile0, but there is tile1
@@ -52,9 +58,10 @@ $(document).ready(function() {
         row.append(img);
     });
     gameBoard.append(row);
-    var matchesMade = 0;
-    var remaining = 8;
-    var matchesMissed = 0;
+    $('#new').click(function () {
+        populateBoard();
+    });
+
     var tile1 = null;
     var tile2 = null;
     $('#game-board img').click(function() {
@@ -143,12 +150,52 @@ $(document).ready(function() {
         gameBoard.append(row);
     }
 
-    //function clicked () {
-    //    $('#game-board img').click(function() {
-    //        // any event handler 'this' refers to the element that raises the event
-    //        var img = $(this);
-    //        var tile = img.data('tile');
-    //    }
-    //}
+    function clicked () {
+        $('#game-board img').click(function() {
+            // any event handler 'this' refers to the element that raises the event
+            var img = $(this);
+            var tile = img.data('tile');
+
+            if (!tile.flipped && count < 2) {
+                count++;
+                flip(img, tile);
+                if (count == 1) {
+                    guess.push(img);
+                    guess.push(tile);
+                } else {
+                    if (guss[1].tileNum == tile.tileNum){
+                        matchesMade++;
+                        remaining--;
+                        $('#ramining').text(remaining);
+                        $('matchesMade').text(matchesMade);
+                        guess.pop();
+                        guss.pop();
+                        if(remaining = 0) {
+                            // some winning game code
+                        }
+                        else {
+                            //winning match code
+                        }
+                    } else {
+                        matchesMissed++;
+                        $('#matchesMissed').text(matchesMissed);
+                    }
+
+                }
+            }
+        });
+    }
+
+    function flip (img, tile) {
+        img.fadeOut(100, function() {
+            if (tile.flipped) {
+                img.attr('src', 'img/tile-back.png');
+            } else {
+                img.attr('src', tile.src);
+            }
+            tile.flipped = !tile.flipped;
+            img.fadeIn(100);
+        });
+    }
 
 });
