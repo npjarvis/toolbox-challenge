@@ -27,8 +27,8 @@ $(document).ready(function() {
     var tilePairs = [];
     // duplicates the 8 tiles, makes 8 pairs of tiles for 16 total
     _.forEach(selectedTiles, function(tile) {
-       tilePairs.push(_.clone(tile));
-       tilePairs.push(_.clone(tile));
+        tilePairs.push(_.clone(tile));
+        tilePairs.push(_.clone(tile));
     });
     tilePairs = _.shuffle(tilePairs);
 
@@ -58,9 +58,9 @@ $(document).ready(function() {
     var tile1 = null;
     var tile2 = null;
     $('#game-board img').click(function() {
-       // any event handler 'this' refers to the element that raises the event
-       var img = $(this);
-       var tile = img.data('tile');
+        // any event handler 'this' refers to the element that raises the event
+        var img = $(this);
+        var tile = img.data('tile');
         // fade out operation takes to parameters
         img.fadeOut(100, function() {
             if (tile.flipped) {
@@ -79,9 +79,9 @@ $(document).ready(function() {
         }else {
             matchesMissed++;
         }
-         if (tile2 != null) {
-             tile1 = null;
-             tile2 = null;
+        if (tile2 != null) {
+            tile1 = null;
+            tile2 = null;
         }
     }); // Comment: on click of gameboard images
 

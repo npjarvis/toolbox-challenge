@@ -3,12 +3,18 @@
     <head lang="en">
         <meta charset="UTF-8">
         <title>Memory Game!</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css"/>
     </head>
-    <body>
+    <body class="container-fluid">
         <h1>Memory Game!</h1>
-        <p id="elapsed">Elapsed Time</p>
-
+        <button type="button" class="btn btn-default" id="new">New Game</button>
+        <div class="row">
+            <div class="col-xs-3">Elapsed Time: <span id="elapsed"></span></div>
+            <div class="col-xs-3">Matches Made: <span id="matchesMade"></span></div>
+            <div class="col-xs-3">Matches Remaining: <span id="remaining"></span></div>
+            <div class="col-xs-3">Missed: <span id="matchesMissed"></span></div>
+        </div>
         <div id="game-board"></div>
 
 
