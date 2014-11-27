@@ -105,4 +105,50 @@ $(document).ready(function() {
 
     }, 1000);
 
+    function populateBoard () {
+        var tilesArray = [];
+        var idx;
+        for(idx = 1; idx <=32; ++idx) {
+            tilesArray.push({
+                tileNum: idx,
+                src:'img/tile' + idx + '.jpg'
+            });
+        }
+        var shuffledTiles = _.shuffle(tilesArray);
+        var selectedTiles = shuffledTiles.slice(0, 8);
+        var tilePairs = [];
+        _.forEach(selectedTiles, function (tile) {
+            tilePairs.push(_.clone(tile));
+            tilePairs.push(_.clone(tile));
+        });
+        tilePairs = _.shuffle(tilePairs);
+
+        var gameBoard =  $('#game-board');
+        var row = $(document.createElement('div'));
+        var img;
+        _.forEach(tilePairs, function(tile, elemIndex) {
+            if (elemIndex > 0 && 0 == elemIndex % 4) {
+                gameBoard.append(row);
+                row = $(document.createElement('div'));
+            }
+
+            img = $(document.createElement('img'));
+            img.attr({
+                src: 'img/tile-back.png',
+                alt: 'image of tile' + tile.tileNum
+            });
+            img.data('tile', tile);
+            row.append(img);
+        });
+        gameBoard.append(row);
+    }
+
+    //function clicked () {
+    //    $('#game-board img').click(function() {
+    //        // any event handler 'this' refers to the element that raises the event
+    //        var img = $(this);
+    //        var tile = img.data('tile');
+    //    }
+    //}
+
 });
