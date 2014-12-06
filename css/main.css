@@ -1,6 +1,15 @@
 #game-board img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     margin-right: 5px;
     padding: 1em;
+}
+
+#elapsed, #matchesMissed, #remaining, #matchesMade {
+    font-size: 150%;
+    font-weight: 500;
+}
+
+body {
+    background-color: cornsilk;
 }

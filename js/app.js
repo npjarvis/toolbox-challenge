@@ -6,50 +6,53 @@ $(document).ready(function() {
     var matchesMade = 0;
     var remaining = 8;
     var matchesMissed = 0;
-    var guessedTiles = 0;
     var guess = [];
     var timer;
     var gameBoard =  $('#game-board');
     var idx;
     var tilesArray = [];
-    var matched = false;
 
 
+    $('#rules').click(function () {
+       window.open("http://www.eduplace.com/ss/act/rules.html");
+    });
 
 
-    // start at 1 instead of 0 because there is no tile0, but there is tile1
     for(idx = 1; idx <=32; ++idx) {
-        // to create new javascript object you use curly braces, define new object on the fly
         tilesArray.push({
             tileNum: idx,
             src:'img/tile' + idx + '.jpg',
             match: false,
-            flipped: false
         });
     }
 
     $('#new').click(startGame);
 
     function startGame () {
-        populateBoard();
         matchesMade = 0;
         remaining = 8;
         matchesMissed = 0;
         beginTime();
+        populateBoard();
 
     }
 
+    // starts the game clock, initializes values for remaining, made, missed
     function beginTime () {
         var startTime = _.now();
         window.clearInterval(timer);
-        $('#elapsed').text();
+        $('#elapsed').text('Elapsed Time: ');
+        $('#remaining').text('Matches Remaining: ' + '8');
+        $('#matchesMade').text('Matches Made: 0');
+        $('#matchesMissed').text('Matches Missed: 0');
+        //$('#win').hide();
         timer = window.setInterval(function() {
             var elapsedSeconds = Math.floor((_.now() - startTime) / 1000);
             $('#elapsed').text('Elapsed Time: ' + elapsedSeconds + 's');
-        })
-    }
+        },1000)
+    };
 
-
+// shuffles tiles, appends to game-board div
     function populateBoard () {
         gameBoard.empty();
         var shuffledTiles = _.shuffle(tilesArray);
@@ -83,6 +86,9 @@ $(document).ready(function() {
         $('#game-board img').click(clicked);
     }
 
+    // activated on click function, checks tile to see if its a match, if not
+    // add one to misses, if match sub remaining and add made. checks for win,
+    // if win end game clock, reveal winning message
     function clicked () {
 
         var img = $(this);
@@ -102,13 +108,12 @@ $(document).ready(function() {
             if (tmpTile.tileNum == tile1.tileNum) {
                 remaining--;
                 matchesMade++;
-                $('#ramining').text(remaining);
-                $('#matchesMade').text(matchesMade);
+                $('#remaining').text("Matches Remaining: " + remaining);
+                $('#matchesMade').text("Matches Made: " + matchesMade);
 
-                if (remaining = 0) {
+                if (remaining == 0) {
                     window.clearInterval(timer);
-                    //winning modal
-                    $('#win').text('Well done, you won! Click to play again!');
+                    $('#win').show();
                 }
             }
             else {
@@ -119,7 +124,7 @@ $(document).ready(function() {
                     flip(tmp);
                 }, 1000);
                 matchesMissed++;
-                $('#matchesMissed').text(matchesMissed)
+                $('#matchesMissed').text("Matches Missed: " + matchesMissed);
             }
             guess = [];
         }
@@ -127,7 +132,7 @@ $(document).ready(function() {
 
 
 
-
+// flip image to back after 100ms
     function flip (img) {
         var tile = img.data('tile');
         img.fadeOut(100, function() {

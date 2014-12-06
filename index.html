@@ -8,22 +8,31 @@
     </head>
     <body class="container-fluid">
         <h1>Memory Game!</h1>
-        <button type="button" class="btn btn-default" id="new">New Game</button>
+
         <div class="row">
-            <span class="col-xs-3" id="elapsed">Elapsed Time: </span>
-            <span class="col-xs-3" id="matchesMade">Matches Made: </span>
-            <span class="col-xs-3" id="reamining">Matches Remaining: </span>
-            <span class="col-xs-3" id="matchesMissed">Missed: </span>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-default" id="new">New Game</button>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-default" id="rules">Learn the Rules</button>
+            </div>
         </div>
+
+        <div class="row">
+            <p class="col-md-2" id="elapsed">Elapsed Time: </p>
+            <p class="col-md-2" id="matchesMade">Matches Made: </p>
+            <p class="col-md-2" id="remaining">Matches Remaining: </p>
+            <p class="col-md-2" id="matchesMissed">Missed: </p>
+        </div>
+
+        <h3 id="win" hidden>Well Done You Winner You!</h3>
+
         <div id="game-board"></div>
-
-        <div class = modal-body id="exit-modal">
-
-        </div>
 
 
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>
